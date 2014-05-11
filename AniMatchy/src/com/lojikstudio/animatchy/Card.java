@@ -6,9 +6,12 @@ public class Card {
 
 	private int id;
 	private Bitmap bmp;
+	private int card;
 	
-	public Card(int frontCard){
-		id=frontCard;
+	
+	public Card(int newId){
+		id=newId;
+		card = Math.round(id/2);
 		
 	}
 	
@@ -22,5 +25,9 @@ public class Card {
 	
 	public int getId(){
 		return id;
+	}
+	
+	public int getCard(){
+		return card;
 	}
 }

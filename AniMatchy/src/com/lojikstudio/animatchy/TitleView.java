@@ -21,58 +21,57 @@ public class TitleView extends View {
 	public TitleView(Context context, int backGroundColor) {
 		super(context);
 		myContext = context;
-		titleGraphic = BitmapFactory.decodeResource(getResources(), R.drawable.title_screen);
-		playButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.playbuttonup);
-		playButtonDown = BitmapFactory.decodeResource(getResources(), R.drawable.playbuttondown);
+		titleGraphic = BitmapFactory.decodeResource(getResources(),
+				R.drawable.title_screen);
+		playButtonUp = BitmapFactory.decodeResource(getResources(),
+				R.drawable.playbuttonup);
+		playButtonDown = BitmapFactory.decodeResource(getResources(),
+				R.drawable.playbuttondown);
 	}
 
-	@Override 
-	public void onSizeChanged (int w, int h, int oldw, int oldh){
+	@Override
+	public void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
 		screenW = w;
 		screenH = h;
 	}
-	
+
 	@Override
-	protected void onDraw(Canvas canvas){
+	protected void onDraw(Canvas canvas) {
 		Paint background = new Paint();
-		background.setColor(getResources().getColor(
-		R.color.background));
+		background.setColor(getResources().getColor(R.color.background));
 		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
-		canvas.drawBitmap(titleGraphic,0,0,null);
+		canvas.drawBitmap(titleGraphic, 0, 0, null);
 		if (playButtonPressed) {
-	         canvas.drawBitmap(playButtonDown,
-	         (screenW-playButtonUp.getWidth())/2,
-	         (int)(screenH*0.7), null);
-	      } else {
-	         canvas.drawBitmap(playButtonUp,
-	         (screenW-playButtonUp.getWidth())/2,
-	         (int)(screenH*0.7), null);
-	     }
+			canvas.drawBitmap(playButtonDown,
+					(screenW - playButtonUp.getWidth()) / 2,
+					(int) (screenH * 0.7), null);
+		} else {
+			canvas.drawBitmap(playButtonUp,
+					(screenW - playButtonUp.getWidth()) / 2,
+					(int) (screenH * 0.7), null);
+		}
 	}
-	
+
 	public boolean onTouchEvent(MotionEvent event) {
 		int eventaction = event.getAction();
-		int X = (int)event.getX();
-		int Y = (int)event.getY();
-		
+		int X = (int) event.getX();
+		int Y = (int) event.getY();
+
 		switch (eventaction) {
 		case MotionEvent.ACTION_DOWN:
-			if (X > screenW-playButtonUp.getWidth()/2 &&
-			X < ((screenW-playButtonUp.getWidth()/2) +
-			playButtonUp.getWidth()) &&
-			Y > (int)(screenH*0.7)  &&
-			Y < (int)(screenH*0.7) +
-			playButtonUp.getHeight()) {
-				playButtonPressed=true;
+			if (X > (screenW - playButtonUp.getWidth()) / 2
+					&& X < (((screenW - playButtonUp.getWidth()) / 2) + playButtonUp
+							.getWidth()) && Y > (int) (screenH * 0.7)
+					&& Y < (int) (screenH * 0.7) + playButtonUp.getHeight()) {
+				playButtonPressed = true;
 			}
 			break;
 		case MotionEvent.ACTION_MOVE:
 			break;
 		case MotionEvent.ACTION_UP:
-			if(playButtonPressed){
-				Intent gameIntent = new Intent(myContext,
-						GameActivity.class);
+			if (playButtonPressed) {
+				Intent gameIntent = new Intent(myContext, GameActivity.class);
 				myContext.startActivity(gameIntent);
 			}
 			playButtonPressed = false;
